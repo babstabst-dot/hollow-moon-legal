@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TikTok connected</title><link rel="stylesheet" href="style.css"></head><body>
+<h1>TikTok sign-in</h1>
+<div id="out"></div>
+<script>
+const R="https://babstabst-dot.github.io/hollow-moon-legal/callback.html";
+const q=new URLSearchParams(location.search), o=document.getElementById("out");
+let k="";try{k=sessionStorage.getItem("tt_key")||"";}catch(e){}
+if(q.get("error")){o.innerHTML="<p>TikTok returned an error: <b></b></p>";o.querySelector("b").textContent=q.get("error")+" "+(q.get("error_description")||"");}
+else if(q.get("code")){
+ const cmd='$s = Read-Host "Client secret"; curl.exe -s -X POST "https://open.tiktokapis.com/v2/oauth/token/" -H "Content-Type: application/x-www-form-urlencoded" -d "client_key='+encodeURIComponent(k||"CLIENT_KEY")+'&client_secret=$s&code='+encodeURIComponent(q.get("code"))+'&grant_type=authorization_code&redirect_uri='+encodeURIComponent(R)+'"';
+ o.innerHTML='<p>Signed in. Within 5 minutes: open <b>PowerShell</b> on your computer, paste the command below, press Enter, paste the <b>Client secret</b> when asked and press Enter again.</p><textarea id="c" readonly style="width:100%;height:140px;font:13px monospace"></textarea><p><button id="cp" style="padding:8px 14px;font:inherit">Copy command</button></p><p>The answer contains <code>"refresh_token":"…"</code>. Copy only the value between the quotes into the environment variable <code>TT_HOLLOW_REFRESH_TOKEN</code>. Never paste it into a chat.</p>';
+ document.getElementById("c").value=cmd;
+ document.getElementById("cp").onclick=()=>{navigator.clipboard.writeText(cmd).then(()=>document.getElementById("cp").textContent="Copied");};
+}else o.innerHTML='<p>Nothing to show. Start from <a href="login.html">login.html</a>.</p>';
+</script>
+<p><a href="index.html">Home</a></p></body></html>
