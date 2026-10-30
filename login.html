@@ -7,6 +7,6 @@
 const R="https://babstabst-dot.github.io/hollow-moon-legal/callback.html";
 document.getElementById("go").onclick=()=>{const k=document.getElementById("k").value.trim();if(!k)return;
 const st=Math.random().toString(36).slice(2);try{sessionStorage.setItem("tt_key",k);sessionStorage.setItem("tt_state",st);}catch(e){}
-location.href="https://www.tiktok.com/v2/auth/authorize/?"+new URLSearchParams({client_key:k,scope:"user.info.basic,user.info.stats,video.upload,video.list",response_type:"code",redirect_uri:R,state:st});};
+location.href="https://www.tiktok.com/v2/auth/authorize/?"+new URLSearchParams({client_key:k,scope:"user.info.basic,user.info.stats,video.upload,video.publish,video.list",response_type:"code",redirect_uri:R,state:st});};
 </script>
 <p><a href="index.html">Home</a></p></body></html>
